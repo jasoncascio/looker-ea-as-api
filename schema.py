@@ -37,7 +37,7 @@ input_example = {
   "lookml_model_name":"thelook",
   "looker_explore_id":"order_items",
   "user_prompt":"Count of accessory orders by date for the last 4 days line chart",
-  "return_format":"json"
+  "result_format":"json"
 }
 
 
@@ -95,6 +95,6 @@ output_example = {
     "lookml_model_name": "thelook",
     "looker_explore_id": "order_items",
     "user_prompt": "Count of accessory orders by date for the last day",
-    "return_format": "json"
+    "result_format": "json"
   }
 }

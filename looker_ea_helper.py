@@ -189,6 +189,10 @@ class LookerEAHelper:
 
 
     def get_looker_return(self, prompt: str, result_format:str='sql'):
+        allowed_result_formats = ["sql", "json", "png", "csv", "json-bi"]
+        if result_format not in allowed_result_formats:
+            raise Exception(f"LookerEAHelper.get_looker_return: result_format must be one of {allowed_result_formats}")
+
         full_prompt = self._generate_full_prompt(prompt)
         full_sql = self._generate_inference_sql(full_prompt)
         vertex_response = json.loads(self._run_sql_query(full_sql, raw_return=True))

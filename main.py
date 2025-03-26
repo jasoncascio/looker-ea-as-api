@@ -57,14 +57,11 @@ def main(request):
         if not user_prompt:
             raise Exception("user_prompt is required")
         
-        ### return_format
-        return_format = request_json.get("return_format")
-        acceptable_return_formats = ["sql", "json", "png", "csv", "json-bi"]
-        if return_format and return_format not in acceptable_return_formats:
-            raise Exception(f"return_format must be one of {acceptable_return_formats}")
-        if not return_format :
-            raise Exception("return_format is required")
-        return_object.content_type = return_format
+        ### result_format
+        result_format = request_json.get("result_format")
+        if not result_format :
+            raise Exception("result_format is required")
+        return_object.content_type = result_format
         
         
     except Exception as e:
@@ -86,8 +83,9 @@ def main(request):
         config.looker_explore_id = looker_explore_id
         
         looker_ea_helper = LookerEAHelper(config)
-        return_object.data = json.loads(looker_ea_helper.get_looker_return(user_prompt, return_format))
-        
+        result_data = looker_ea_helper.get_looker_return(user_prompt, result_format)
+        return_object.data = json.loads(result_data) if result_format.startswith('json') else result_data
+
         return Response(json.dumps(return_object.to_dict()), status=200, content_type='application/json')
         
 
