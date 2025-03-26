@@ -86,7 +86,7 @@ def main(request):
         config.looker_explore_id = looker_explore_id
         
         looker_ea_helper = LookerEAHelper(config)
-        return_object.data = json.loads(looker_ea_helper.get_looker_return(user_prompt, 'json'))
+        return_object.data = json.loads(looker_ea_helper.get_looker_return(user_prompt, return_format))
         
         return Response(json.dumps(return_object.to_dict()), status=200, content_type='application/json')
         
