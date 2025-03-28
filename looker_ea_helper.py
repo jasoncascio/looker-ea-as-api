@@ -19,12 +19,16 @@ class LookerEAHelperConfig:
        return self.lookml_model_name + ":" + self.looker_explore_id
     
     @property
-    def is_valid(self): # all are required
-        for var in list(vars(self)):
-            if not getattr(self, var):
-                return False
-
-        return True
+    def is_valid(self):
+        return (
+            self.explore_assistant_connection_name and 
+            self.explore_assistant_dataset and 
+            self.explore_assistant_examples_table and 
+            self.explore_assistant_refinements_table and 
+            self.explore_assistant_model_id and 
+            self.lookml_model_name and 
+            self.looker_explore_id
+        )
 
 
 
