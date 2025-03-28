@@ -1,6 +1,6 @@
 import functions_framework
 from flask import Response
-import json
+import json, time
 
 from .looker_ea_helper import LookerEAHelperConfig, LookerEAHelper
 
@@ -19,6 +19,7 @@ class ReturnObject:
         self.content_type = ""
         self.data = ""
         self.request_object = ""
+        self._start_time = time.time()
 
     def to_dict(self):
         return {
@@ -27,7 +28,8 @@ class ReturnObject:
                 "content_type": self.content_type,
                 "data": self.data
             },
-            "request_object": self.request_object         
+            "request_object": self.request_object,
+            "processing_seconds": round(time.time() - self._start_time, 4)
         }
 
 
