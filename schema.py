@@ -70,13 +70,21 @@ output_schema = {
                     "description": "This is the raw data being returned from the API.",
                     "default": ""
                 }
-            }
+            },
+            "required": [
+                "content_type",
+                "data"
+            ]
         },
         "request": {
             "type": "object",
             "description": "This is the request object that was sent to the API.",
         }
-    }
+    },
+    "required": [
+        "error_message",
+        "return_data"
+    ]
 }
 
 output_example = {
